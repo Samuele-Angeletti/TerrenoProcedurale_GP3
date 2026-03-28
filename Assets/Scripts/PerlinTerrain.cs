@@ -104,6 +104,7 @@ public class PerlinTerrain : MonoBehaviour
 
     private Terrain _terrain;
     private TerrainData _terrainData;
+    private TerrainPainter _terrainPainter;
 
     private void Awake()
     {
@@ -114,6 +115,7 @@ public class PerlinTerrain : MonoBehaviour
     {
         _terrain = GetComponent<Terrain>();
         _terrainData = _terrain.terrainData;
+        _terrainPainter = GetComponent<TerrainPainter>();
     }
 
     private void Start()
@@ -125,7 +127,6 @@ public class PerlinTerrain : MonoBehaviour
     /// Funzione di generazione del terreno usando il Perlin Noise.
     /// Calcola la struttura del noise e lo applica al terreno
     /// </summary>
-    [ContextMenu("Debug_generation")]
     public void Generate()
     {
         // FASE 1 Sceglie un seed
@@ -162,6 +163,9 @@ public class PerlinTerrain : MonoBehaviour
 
         // FASE 5 Scrive l'heightmap sul terrain data
         _terrainData.SetHeights(0, 0, heights);
+
+        // FASE 6 (esterna a questo behavior)
+        _terrainPainter.Paint();
     }
 
     private float[,] GenerateHeightmap(int currentSeed)

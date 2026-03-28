@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &25935734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 25935736}
+  - component: {fileID: 25935735}
+  m_Layer: 0
+  m_Name: RandomWalkGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &25935735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25935734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b5210809075884e8d37d482356d962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleRandomWalk
+  gridDimension: 10
+  attempts: 5
+--- !u!4 &25935736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25935734}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +478,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1138744106
+--- !u!1 &1290078641
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -440,35 +486,58 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1138744110}
-  - component: {fileID: 1138744109}
-  - component: {fileID: 1138744108}
-  - component: {fileID: 1138744107}
+  - component: {fileID: 1290078646}
+  - component: {fileID: 1290078645}
+  - component: {fileID: 1290078644}
+  - component: {fileID: 1290078643}
+  - component: {fileID: 1290078642}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!114 &1138744107
+  m_IsActive: 0
+--- !u!114 &1290078642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138744106}
+  m_GameObject: {fileID: 1290078641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92f344b175453e48a574d5bccf87c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TerrainPainter
+  waterLayer: {fileID: 8574412962073106934, guid: 0287e4d767144df4b961930df6d35197, type: 2}
+  sandLayer: {fileID: 8574412962073106934, guid: 6e5f16cd9c9833844ac978e353fbe7e8, type: 2}
+  grassLayer: {fileID: 8574412962073106934, guid: e7094f16cc8b8a341bc56c8302ba1edf, type: 2}
+  dirtLayer: {fileID: 8574412962073106934, guid: 9adac3583cb84244dacfeb55360ebcdd, type: 2}
+  rockLayer: {fileID: 8574412962073106934, guid: f667e2e6c5417d64698c093e858a7a37, type: 2}
+  waterThreshold: 0.006
+  sandThreshold: 0.047
+  grassThreshold: 0.144
+  dirtThreshold: 0.343
+  blendRange: 0.0182
+--- !u!114 &1290078643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290078641}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2d64451f5f4ce9428e876cff06f25ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerlinTerrain
   resolution: 513
-  scale: 30
-  octaves: 7
-  persistance: 0.427
-  lacunarity: 3.24
-  offset: {x: 1.61, y: 1.35}
+  scale: 361
+  octaves: 3
+  persistance: 0.334
+  lacunarity: 2.083
+  offset: {x: 0, y: 0}
   randomSeed: 0
   seed: 43
   heightCurve:
@@ -495,20 +564,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  heightMultiplier: 0.6
-  useFalloff: 0
-  falloffStrenght: 3.02
-  falloffShift: 2.98
+  heightMultiplier: 0.886
+  useFalloff: 1
+  falloffStrenght: 3.97
+  falloffShift: 4.77
   applyErosion: 0
-  erosionIteration: 20
-  erosionStrenght: 0.1
---- !u!154 &1138744108
+  erosionIteration: 5
+  erosionStrenght: 0.02
+--- !u!154 &1290078644
 TerrainCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138744106}
+  m_GameObject: {fileID: 1290078641}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -522,13 +591,13 @@ TerrainCollider:
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 1a75397a4d265bd40af44ea5dbdddece, type: 2}
   m_EnableTreeColliders: 1
---- !u!218 &1138744109
+--- !u!218 &1290078645
 Terrain:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138744106}
+  m_GameObject: {fileID: 1290078641}
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 1a75397a4d265bd40af44ea5dbdddece, type: 2}
@@ -562,13 +631,13 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
---- !u!4 &1138744110
+--- !u!4 &1290078646
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138744106}
+  m_GameObject: {fileID: 1290078641}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -584,4 +653,5 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 1138744110}
+  - {fileID: 1290078646}
+  - {fileID: 25935736}
