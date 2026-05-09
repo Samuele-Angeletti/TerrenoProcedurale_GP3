@@ -18,15 +18,13 @@ public class SimpleRandomWalk : MonoBehaviour
     {
         generationResult = algoDirector.GenerateRandomWalk();
         generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.RandomWalk);
-        //generationResult = new RandomWalkGenerator(new RandomWalkSettings
-        //{
-        //    Start = (complexSize / 2, complexSize / 2),
-        //    Steps = complexSteps,
-        //    WalkerCount = walkerCount,
-        //    Bounds = (0, 0, complexSize - 1, complexSize - 1),
-        //    Seed = seed,
-        //    RandomSeed = randomSeeded
-        //}).Generate();
+    }
+
+    [ContextMenu("Debug_BSP")]
+    public void GenerateBSPDebug()
+    {
+        generationResult = algoDirector.GenerateRandomWalk();
+        generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.BSP);
     }
 
     [ContextMenu("Debug_SimpleWalker")]
