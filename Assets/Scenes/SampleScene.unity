@@ -510,9 +510,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AlgorithmDirector
   complexSteps: 500
   complexSize: 50
-  walkerCount: 1
+  walkerCount: 10
   seed: 0
   randomSeeded: 0
+  bspWidth: 50
+  bspHeight: 30
+  bspMinPartitionWidth: 5
+  bspMinPartitionHeight: 5
+  bspRoomPadding: 1
+  bspSeed: 1
+  bspRandomSeed: 1
 --- !u!4 &1221323532
 Transform:
   m_ObjectHideFlags: 0
