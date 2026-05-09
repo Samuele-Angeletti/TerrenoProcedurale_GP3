@@ -35,6 +35,10 @@ public class AlgorithmDirector : MonoBehaviour
         {
             case AlgorithmType.RandomWalk:
                 return GenerateRandomWalk();
+            case AlgorithmType.BSP:
+                break;
+            case AlgorithmType.CellularAutomata:
+                break;
         }
 
         return null;
