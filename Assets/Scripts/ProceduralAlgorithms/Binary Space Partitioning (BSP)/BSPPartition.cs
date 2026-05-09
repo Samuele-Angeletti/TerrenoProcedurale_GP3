@@ -44,5 +44,24 @@ public class BSPPartition
     public BSPPartition Second { get; private set; }
     #endregion
 
+    #region STANZA
 
+    // per scelta architetturale usiamo una tupla
+    public (int x, int y, int width, int height)? Room { get; private set; }
+
+    #endregion
+
+    #region COSTRUTTORE
+    public BSPPartition(int x, int y, int width, int height)
+    {
+        X = x;
+        Y = y;
+        Width = width;
+        Height = height;
+    }
+    #endregion
+
+    #region PUBLIC API
+
+    #endregion
 }
