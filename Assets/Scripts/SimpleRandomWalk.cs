@@ -1,20 +1,40 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleRandomWalk : MonoBehaviour
 {
+    [Header("Simple Walker Settings")]
     [SerializeField] int gridDimension;
     [SerializeField] int attempts;
 
+    [SerializeField] AlgorithmDirector algoDirector;
     bool[,] grid;
 
-    private void Start()
+    GenerationResult generationResult;
+
+    [ContextMenu("Debug_ComplexWalker")]
+    public void GenerateComplexDebug()
     {
-        Generate();
+        generationResult = algoDirector.GenerateRandomWalk();
+        generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.RandomWalk);
+        //generationResult = new RandomWalkGenerator(new RandomWalkSettings
+        //{
+        //    Start = (complexSize / 2, complexSize / 2),
+        //    Steps = complexSteps,
+        //    WalkerCount = walkerCount,
+        //    Bounds = (0, 0, complexSize - 1, complexSize - 1),
+        //    Seed = seed,
+        //    RandomSeed = randomSeeded
+        //}).Generate();
     }
 
-    [ContextMenu("Debug_generation")]
-    public void Generate()
+    [ContextMenu("Debug_SimpleWalker")]
+    public void GenerateDebug()
+    {
+        StartCoroutine(Generate());
+    }
+    public IEnumerator Generate()
     {
         grid = new bool[gridDimension, gridDimension];
 
@@ -81,25 +101,36 @@ public class SimpleRandomWalk : MonoBehaviour
             {
                 grid[currentPosition.y, currentPosition.x] = true;
             }
+
+            yield return new WaitForSeconds(0.2f);
         }
         while (currentAttempt <= attempts);
     }
 
     private void OnDrawGizmos()
     {
-        if (grid == null)
-            return;
-
-        for (int y = 0; y < gridDimension; y++)
+        if (grid != null)
         {
-            for (int x = 0; x < gridDimension; x++)
+            for (int y = 0; y < gridDimension; y++)
             {
-                if (grid[y, x])
+                for (int x = 0; x < gridDimension; x++)
                 {
-                    Gizmos.color = Color.yellow;
-                    Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+                    if (grid[y, x])
+                    {
+                        Gizmos.color = Color.yellow;
+                        Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+                    }
                 }
             }
+        }
+
+        if (generationResult != null)
+        {
+            generationResult.ForEachCell((x, y, value) =>
+            {
+                Gizmos.color = value == 0 ? Color.green : Color.gray;
+                Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+            });
         }
     }
 }
