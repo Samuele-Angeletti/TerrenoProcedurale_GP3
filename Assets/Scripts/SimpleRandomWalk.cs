@@ -10,6 +10,7 @@ public class SimpleRandomWalk : MonoBehaviour
 
     [SerializeField] AlgorithmDirector algoDirector;
     [SerializeField] MeshProceduralGenerator meshGenerator;
+    [SerializeField] PathfindingGrid pathfindingGrid;
     bool[,] grid;
 
     GenerationResult generationResult;
@@ -32,6 +33,7 @@ public class SimpleRandomWalk : MonoBehaviour
     {
         generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.CellularAutomata);
         meshGenerator.Generate(generationResult);
+        pathfindingGrid.Initialize(generationResult);
     }
 
     [ContextMenu("Debug_SimpleWalker")]
