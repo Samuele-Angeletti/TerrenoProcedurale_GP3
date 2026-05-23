@@ -23,6 +23,17 @@ public class AlgorithmDirector : MonoBehaviour
     [SerializeField] int bspSeed = 1;
     [SerializeField] bool bspRandomSeed = false;
 
+    [Header("Cellular Automata Settings")]
+    [SerializeField] int caWidth = 50;
+    [SerializeField] int caHeight = 50;
+    [SerializeField] int caInitialWallChance = 45;
+    [SerializeField] int caSteps = 5;
+    [SerializeField] int caBirthLimit = 4;
+    [SerializeField] int caDeathLimit = 3;
+    [SerializeField] bool caSolidBorder = true;
+    [SerializeField] int caSeed = 45;
+    [SerializeField] bool caRandomSeed = false;
+
     public enum AlgorithmType { RandomWalk, BSP, CellularAutomata };
 
     public GenerationResult GenerateRandomWalk()
@@ -52,6 +63,22 @@ public class AlgorithmDirector : MonoBehaviour
         }).Generate();
     }
 
+    private GenerationResult GenerateCellularAutomata()
+    {
+        return new CellularAutomataGenerator(new CellularAutomataSettings()
+        {
+            Width = caWidth,
+            Height = caHeight,
+            InitialWallChance = caInitialWallChance,
+            Steps = caSteps,
+            BirthLimit = caBirthLimit,
+            DeathLimit = caDeathLimit,
+            Seed = caSeed,
+            SolidBorder = caSolidBorder,
+            RandomSeed = caRandomSeed
+        }).Generate();
+    }
+
     public GenerationResult Generate(AlgorithmType type)
     {
         switch (type)
@@ -61,9 +88,10 @@ public class AlgorithmDirector : MonoBehaviour
             case AlgorithmType.BSP:
                 return GenerateBSP();
             case AlgorithmType.CellularAutomata:
-                break;
+                return GenerateCellularAutomata();
         }
 
         return null;
     }
+
 }

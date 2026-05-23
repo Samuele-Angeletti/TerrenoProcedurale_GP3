@@ -9,6 +9,7 @@ public class SimpleRandomWalk : MonoBehaviour
     [SerializeField] int attempts;
 
     [SerializeField] AlgorithmDirector algoDirector;
+    [SerializeField] MeshProceduralGenerator meshGenerator;
     bool[,] grid;
 
     GenerationResult generationResult;
@@ -16,15 +17,21 @@ public class SimpleRandomWalk : MonoBehaviour
     [ContextMenu("Debug_ComplexWalker")]
     public void GenerateComplexDebug()
     {
-        generationResult = algoDirector.GenerateRandomWalk();
         generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.RandomWalk);
+        meshGenerator.Generate(generationResult);
     }
 
     [ContextMenu("Debug_BSP")]
     public void GenerateBSPDebug()
     {
-        generationResult = algoDirector.GenerateRandomWalk();
         generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.BSP);
+        meshGenerator.Generate(generationResult);
+    }
+    [ContextMenu("Debug_CA")]
+    public void GenerateCADebug()
+    {
+        generationResult = algoDirector.Generate(AlgorithmDirector.AlgorithmType.CellularAutomata);
+        meshGenerator.Generate(generationResult);
     }
 
     [ContextMenu("Debug_SimpleWalker")]
@@ -49,7 +56,7 @@ public class SimpleRandomWalk : MonoBehaviour
         {
             if (Random.Range(0, 2) == 0)
             {
-                // su / giù
+                // su / gi 
                 if (Random.Range(0, 2) == 0)
                 {
                     // su
@@ -57,7 +64,7 @@ public class SimpleRandomWalk : MonoBehaviour
                 }
                 else
                 {
-                    // giù
+                    // gi 
                     currentPosition.y -= 1;
                 }
             }
@@ -107,28 +114,28 @@ public class SimpleRandomWalk : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (grid != null)
-        {
-            for (int y = 0; y < gridDimension; y++)
-            {
-                for (int x = 0; x < gridDimension; x++)
-                {
-                    if (grid[y, x])
-                    {
-                        Gizmos.color = Color.yellow;
-                        Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
-                    }
-                }
-            }
-        }
+        // if (grid != null)
+        // {
+        //     for (int y = 0; y < gridDimension; y++)
+        //     {
+        //         for (int x = 0; x < gridDimension; x++)
+        //         {
+        //             if (grid[y, x])
+        //             {
+        //                 Gizmos.color = Color.yellow;
+        //                 Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+        //             }
+        //         }
+        //     }
+        // }
 
-        if (generationResult != null)
-        {
-            generationResult.ForEachCell((x, y, value) =>
-            {
-                Gizmos.color = value == 0 ? Color.green : Color.gray;
-                Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
-            });
-        }
+        // if (generationResult != null)
+        // {
+        //     generationResult.ForEachCell((x, y, value) =>
+        //     {
+        //         Gizmos.color = value == 0 ? Color.green : Color.gray;
+        //         Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+        //     });
+        // }
     }
 }
