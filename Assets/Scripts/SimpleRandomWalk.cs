@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class SimpleRandomWalk : MonoBehaviour
 {
     [Header("Simple Walker Settings")]
@@ -12,6 +13,11 @@ public class SimpleRandomWalk : MonoBehaviour
     [SerializeField] MeshProceduralGenerator meshGenerator;
     [SerializeField] PathfindingGrid pathfindingGrid;
     bool[,] grid;
+
+    private void Awake()
+    {
+        GenerateCADebug();
+    }
 
     GenerationResult generationResult;
 
